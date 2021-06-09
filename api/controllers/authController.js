@@ -77,11 +77,11 @@ exports.handlerLogin = async (req, res) => {
             expiresIn: "24h",
         });
 
-        res.json({
+        res.cookie("token", token, { httpOnly: true }).json({
             status: "success",
             auth: true,
             message: "Login successfully",
-            token,
+            // token,
         });
     } catch (err) {
         console.error(err);
@@ -92,6 +92,19 @@ exports.handlerLogin = async (req, res) => {
 exports.isVerify = async (req, res) => {
     try {
         res.json({ status: "success", auth: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+};
+
+exports.handlerLogout = (req, res) => {
+    try {
+        // cookies.set("token", { expires: Date.now() });
+        res.clearCookie("token").json({
+            status: "success",
+            message: "Logout successfully",
+        });
     } catch (err) {
         console.error(err);
         res.status(500).json(err);

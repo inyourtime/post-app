@@ -1,25 +1,49 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import {Redirect} from 'react-router-dom'
 
-import Login from "./Login";
-import Register from "./Register";
-import Header from './Header'
+import Header from "./Header";
+import Content from "./Content";
 
-const Root = () => {
+const Dashboard = () => {
+    const [isLogout, setIsLogout] = useState(false);
+
+    async function onClickLogout() {
+        try {
+            const response = await fetch("/auth/logout", {
+                method: "GET",
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes);
+            setIsLogout(true);
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     return (
         <Fragment>
             <div className="container">
-                <Header/>
-                <div class="row justify-content-evenly">
-                    <div class="col-4">
-                        <Login />
+                <Header />
+
+                <div className="row">
+                    <div className="col">
+                        <Content />
                     </div>
-                    <div class="col-4">
-                        <Register />
+                    <div className="col">
+                        <Content />
+                    </div>
+                    <div className="col">
+                        <Content />
                     </div>
                 </div>
+                {/* <Content /> */}
             </div>
+            <button onClick={onClickLogout} className="btn btn-primary">
+                logout
+            </button>
         </Fragment>
     );
 };
 
-export default Root;
+export default Dashboard;

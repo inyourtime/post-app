@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 // require route
@@ -15,9 +16,11 @@ const connectDB = require("./config/database");
 connectDB();
 
 // middleware
-app.use(morgan("combined"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+
 
 // auth route
 app.use("/auth", authRoute);

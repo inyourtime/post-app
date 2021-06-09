@@ -1,29 +1,11 @@
-import React, { Fragment } from "react";
-
-import Header from "./Header";
-import Content from "./Content";
+import React from 'react'
 
 const Dashboard = () => {
     return (
-        <Fragment>
-            <div className="container">
-                <Header />
+        <div>
+            
+        </div>
+    )
+}
 
-                <div className="row">
-                    <div className="col">
-                        <Content />
-                    </div>
-                    <div className="col">
-                        <Content />
-                    </div>
-                    <div className="col">
-                        <Content />
-                    </div>
-                </div>
-                {/* <Content /> */}
-            </div>
-        </Fragment>
-    );
-};
-
-export default Dashboard;
+export default Dashboard
